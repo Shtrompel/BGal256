@@ -1,0 +1,149 @@
+[
+    {
+        "pos": "head",
+        "clothes": [
+            {
+                "name": "green_hair",
+                "center": {
+                    "x": 571,
+                    "y": 247
+                }
+            },
+			
+				{
+					"name": "pink_hair",
+					"center": {
+						"x": 611,
+						"y": 476
+					},
+					"layer": 0.25
+				},
+				{
+					"name": "pink_hair_top",
+					"connected": "pink_hair",
+					"center": {
+						"x": 604,
+						"y": 353
+					},
+					"layer": 0.75
+				}
+			,
+            {
+                "name": "purple_hair",
+                "center": {
+                    "x": 607,
+                    "y": 340
+                }
+            },
+            {
+                "name": "red_hair",
+                "center": {
+                    "x": 617,
+                    "y": 230
+                }
+            }
+        ]
+    },
+    {
+        "pos": "shirt",
+        "clothes": [
+            {
+                "name": "green_shirt",
+                "center": {
+                    "x": 567,
+                    "y": 636
+                }
+            },
+            {
+                "name": "pink_shirt",
+                "center": {
+                    "x": 578,
+                    "y": 593
+                }
+            },
+            {
+                "name": "purple_shirt",
+                "center": {
+                    "x": 576,
+                    "y": 745
+                }
+            },
+            {
+                "name": "red_shirt",
+                "center": {
+                    "x": 575,
+                    "y": 745
+                }
+            }
+        ]
+    },
+    {
+        "pos": "pants",
+        "clothes": [
+            {
+                "name": "green_pants",
+                "center": {
+                    "x": 592,
+                    "y": 1033
+                }
+            },
+            {
+                "name": "pink_pants",
+                "center": {
+                    "x": 594,
+                    "y": 1079
+                }
+            },
+            {
+                "name": "purple_pants",
+                "center": {
+                    "x": 579,
+                    "y": 1324
+                },
+				"layer": 0.6
+            },
+            {
+                "name": "red_pants",
+                "center": {
+                    "x": 543,
+                    "y": 1433
+                },
+				"layer": 0.45
+            }
+        ]
+    },
+    {
+        "pos": "shoes",
+        "clothes": [
+            {
+                "name": "green_shoes",
+                "center": {
+                    "x": 539,
+                    "y": 1775
+                },
+				"layer": 0.6
+            },
+            {
+                "name": "pink_shoes",
+                "center": {
+                    "x": 536,
+                    "y": 1938
+                }
+            },
+            {
+                "name": "purple_shoes",
+                "center": {
+                    "x": 541,
+                    "y": 1937
+                }
+            },
+            {
+                "name": "red_shoes",
+                "center": {
+                    "x": 537,
+                    "y": 1947
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,178 @@
+[
+  {
+    "name": "Chromatic",
+    "intervals": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  },
+  {
+    "name": "Major (Ionian)",
+    "intervals": [0, 2, 4, 5, 7, 9, 11]
+  },
+  {
+    "name": "Natural Minor (Aeolian)",
+    "intervals": [0, 2, 3, 5, 7, 8, 10]
+  },
+  {
+    "name": "Harmonic Minor",
+    "intervals": [0, 2, 3, 5, 7, 8, 11]
+  },
+  {
+    "name": "Melodic Minor",
+    "intervals": [0, 2, 3, 5, 7, 9, 11]
+  },
+  {
+    "name": "Dorian",
+    "intervals": [0, 2, 3, 5, 7, 9, 10]
+  },
+  {
+    "name": "Phrygian",
+    "intervals": [0, 1, 3, 5, 7, 8, 10]
+  },
+  {
+    "name": "Lydian",
+    "intervals": [0, 2, 4, 6, 7, 9, 11]
+  },
+  {
+    "name": "Mixolydian",
+    "intervals": [0, 2, 4, 5, 7, 9, 10]
+  },
+  {
+    "name": "Locrian",
+    "intervals": [0, 1, 3, 5, 6, 8, 10]
+  },
+  {
+    "name": "Major Pentatonic",
+    "intervals": [0, 2, 4, 7, 9]
+  },
+  {
+    "name": "Minor Pentatonic",
+    "intervals": [0, 3, 5, 7, 10]
+  },
+  {
+    "name": "Blues",
+    "intervals": [0, 3, 5, 6, 7, 10]
+  },
+  {
+    "name": "Whole Tone",
+    "intervals": [0, 2, 4, 6, 8, 10]
+  },
+  {
+    "name": "Diminished (Half-Whole)",
+    "intervals": [0, 1, 3, 4, 6, 7, 9, 10]
+  },
+  {
+    "name": "Diminished (Whole-Half)",
+    "intervals": [0, 2, 3, 5, 6, 8, 9, 11]
+  },
+  {
+    "name": "Hungarian Minor",
+    "intervals": [0, 2, 3, 6, 7, 8, 11]
+  },
+  {
+    "name": "Persian",
+    "intervals": [0, 1, 4, 5, 6, 8, 11]
+  },
+  {
+    "name": "Arabian",
+    "intervals": [0, 2, 4, 5, 6, 8, 10]
+  },
+  {
+    "name": "Egyptian",
+    "intervals": [0, 2, 5, 7, 10]
+  },
+  {
+    "name": "Hirajoshi",
+    "intervals": [0, 2, 3, 7, 8]
+  },
+  {
+    "name": "In Sen",
+    "intervals": [0, 1, 5, 7, 10]
+  },
+  {
+    "name": "Neapolitan Minor",
+    "intervals": [0, 1, 3, 5, 7, 8, 11]
+  },
+  {
+    "name": "Double Harmonic",
+    "intervals": [0, 1, 4, 5, 7, 8, 11]
+  },
+  {
+    "name": "Enigmatic",
+    "intervals": [0, 1, 4, 6, 8, 10, 11]
+  },
+  {
+    "name": "Phrygian Dominant",
+    "intervals": [0, 1, 4, 5, 7, 8, 10]
+  },
+  {
+    "name": "Super Locrian (Altered)",
+    "intervals": [0, 1, 3, 4, 6, 8, 10]
+  },
+  {
+    "name": "Lydian Dominant",
+    "intervals": [0, 2, 4, 6, 7, 9, 10]
+  },
+  {
+    "name": "Lydian Augmented",
+    "intervals": [0, 2, 4, 6, 8, 9, 11]
+  },
+  {
+    "name": "Locrian #2",
+    "intervals": [0, 2, 3, 5, 6, 8, 10]
+  },
+  {
+    "name": "Bebop Dominant",
+    "intervals": [0, 2, 4, 5, 7, 9, 10, 11]
+  },
+  {
+    "name": "Bebop Major",
+    "intervals": [0, 2, 4, 5, 7, 8, 9, 11]
+  },
+  {
+    "name": "Augmented Scale",
+    "intervals": [0, 3, 4, 7, 8, 11]
+  },
+  {
+    "name": "Prometheus",
+    "intervals": [0, 2, 4, 6, 9, 10]
+  },
+  {
+    "name": "Romanian Minor",
+    "intervals": [0, 2, 3, 6, 7, 9, 10]
+  },
+  {
+    "name": "Hindu Scale",
+    "intervals": [0, 2, 4, 5, 7, 8, 10]
+  },
+  {
+    "name": "Balinese",
+    "intervals": [0, 1, 3, 7, 8]
+  },
+  {
+    "name": "Iwato",
+    "intervals": [0, 1, 5, 6, 10]
+  },
+  {
+    "name": "Kumoi",
+    "intervals": [0, 2, 3, 7, 9]
+  },
+  {
+    "name": "Chinese (Jiao)",
+    "intervals": [0, 4, 6, 7, 11]
+  },
+  {
+    "name": "Yo Scale",
+    "intervals": [0, 2, 5, 7, 9]
+  },
+  {
+    "name": "Algerian Scale",
+    "intervals": [0, 2, 3, 5, 6, 7, 8, 11]
+  },
+  {
+    "name": "Raga Todi",
+    "intervals": [0, 1, 3, 6, 7, 8, 11]
+  },
+  {
+    "name": "Tritone Scale",
+    "intervals": [0, 1, 4, 6, 7, 10]
+  }
+]
