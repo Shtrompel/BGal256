@@ -1,6 +1,6 @@
 My collection of modules for the VCV Rack virtual modular synthersizer app.
 
-![Demo Gif](https://github.com/Shtrompel/BGal256/demo.gif)
+![Demo Gif](https://github.com/Shtrompel/BGal256/blob/main/demo.gif)
 
 ## Documentation 
 
