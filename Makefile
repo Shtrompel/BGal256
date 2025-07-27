@@ -1,5 +1,5 @@
 # If RACK_DIR is not defined when calling the Makefile, default to two directories above
-RACK_DIR ?= ~/Projects/Rack-SDK
+RACK_DIR ?= ../..
 
 PLUGIN_LDFLAGS += -lglew32 -lmesa
 PLUGIN_CFLAGS += -DGL_GLEXT_PROTOTYPES
