@@ -7,6 +7,11 @@ SortStep::SortStep()
 	config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
 	configParam(SCALE_PARAM, 0.1f, 10.f, 1.0f, "Scale");
 
+	configButton(RESET_BUTTON_PARAM, "Reset");
+	configButton(SHUFFLE_BUTTON_PARAM, "Shuffle Array");
+	configButton(RECALCULATE_BUTTON_PARAM, "Recalculate");
+	
+
 	configInput(STEP_INPUT, "Global Step");
 	configInput(RESET_INPUT, "Reset");
 	configInput(SHUFFLE_STEP_INPUT, "Shuffle Step");
@@ -492,17 +497,17 @@ void SortStep::process(const ProcessArgs &args)
 		}
 	}
 
-	if (checkTrigger(RESET_INPUT))
+	if (checkTrigger(RESET_INPUT) || params[RESET_BUTTON_PARAM].getValue()) 
 	{
 		sorterArray.reset();
 	}
 
-	if (checkTrigger(RANDOMIZE_INPUT))
+	if (checkTrigger(RANDOMIZE_INPUT) || params[SHUFFLE_BUTTON_PARAM].getValue())
 	{
 		sorterArray.shuffle();
 	}
 
-	if (checkTrigger(RECALCULATE_INPUT))
+	if (checkTrigger(RECALCULATE_INPUT) || params[RECALCULATE_BUTTON_PARAM].getValue())
 	{
 		sorterArray.calculate();
 	}
@@ -617,21 +622,7 @@ SortStepWidget::SortStepWidget(SortStep *module)
 	addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 	addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-	/*
-			addInput(createInputCentered<PJ301MPort>(mm2px(
-				Vec(20., 100.)), module, SortStep::RESET_INPUT));
-			addInput(createInputCentered<PJ301MPort>(mm2px(
-				Vec(40., 100.)), module, SortStep::ARRAYSIZE_INPUT));
-			addInput(createInputCentered<PJ301MPort>(mm2px(
-				Vec(60., 100.)), module, SortStep::RANDOMIZE_INPUT));
-			addInput(createInputCentered<PJ301MPort>(mm2px(
-				Vec(80., 100.)), module, SortStep::STEP_INPUT));
 
-			addOutput(createOutputCentered<PJ301MPort>(mm2px(
-				Vec(50., 120.)), module, SortStep::STEP_OUTPUT));
-			addOutput(createOutputCentered<PJ301MPort>(mm2px(
-				Vec(70., 120.)), module, SortStep::CV_OUTPUT));
-				*/
 
 	float xBase = 0;
 	float yBase = 83.026f;
@@ -655,6 +646,18 @@ SortStepWidget::SortStepWidget(SortStep *module)
 
 	addInput(createInputCentered<PJ301MPort>(mm2px(Vec(xBase + rowE, rowTopY)), module, SortStep::ALGORITHM_INPUT));
 	addInput(createInputCentered<PJ301MPort>(mm2px(Vec(xBase + rowE, rowCentreY)), module, SortStep::ARRAYSIZE_INPUT));
+
+	float buttonsOffset = 1.f / 3;
+
+	addParam(createParamCentered<VCVButton >(
+		mm2px(Vec(xBase + rowA*(1-buttonsOffset)+rowB*buttonsOffset, rowBottomY)), module, 
+		SortStep::RESET_BUTTON_PARAM));
+	addParam(createParamCentered<VCVButton >(
+		mm2px(Vec(xBase + rowB*(1-buttonsOffset)+rowC*buttonsOffset, rowBottomY)), module, 
+		SortStep::SHUFFLE_BUTTON_PARAM));
+	addParam(createParamCentered<VCVButton >(
+		mm2px(Vec(xBase + rowC*(1-buttonsOffset)+(rowC+22.5)*buttonsOffset, rowBottomY)), module, 
+		SortStep::RECALCULATE_BUTTON_PARAM));
 
 	addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(xBase + rowA, rowCentreY)), module, SortStep::END_OUTPUT));
 	addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(xBase + rowB, rowCentreY)), module, SortStep::SHUFFLE_END_OUTPUT));

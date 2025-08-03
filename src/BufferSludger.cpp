@@ -4,6 +4,12 @@
 
 #include "Utils.hpp"
 
+/**
+ * This code was taken from JW-Modules at:
+ * https://github.com/jeremywen/JW-Modules/blob/master/src/JWModules.hpp
+ * Original Copyright (c) [2017], [ Jeremy Wentworth]  
+ * Used under the BSD 3-Clause License.  
+*/
 JwHorizontalSwitch::JwHorizontalSwitch()
 {
 	addFrame(APP->window->loadSvg(

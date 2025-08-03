@@ -7,6 +7,9 @@
 struct SortStep : Module {
     enum ParamId {
         SCALE_PARAM,
+        RESET_BUTTON_PARAM,
+        SHUFFLE_BUTTON_PARAM,
+        RECALCULATE_BUTTON_PARAM,
         PARAMS_LEN
     };
     enum InputId {

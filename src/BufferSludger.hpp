@@ -27,6 +27,13 @@
 // audio offset effect when dry input is enabled.
 constexpr int GNOME_PLEASING_NUMBER = 11;
 
+
+/**
+ * This code was taken from JW-Modules at:
+ * https://github.com/jeremywen/JW-Modules/blob/master/src/JWModules.hpp
+ * Original Copyright (c) [2017], [ Jeremy Wentworth]  
+ * Used under the BSD 3-Clause License.  
+*/
 struct JwHorizontalSwitch : SVGSwitch {
     JwHorizontalSwitch();
 };
