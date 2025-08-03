@@ -1,6 +1,6 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
-#include <GL/gl.h>
+//  #include <GL/gl.h>
 #include "DressMeUp.hpp"
 
 DressMeUp::DressMeUp()
@@ -740,5 +740,6 @@ void DressMeUpWidget::drawLayer(const DrawArgs &args, int layer)
 {
 	ModuleWidget::drawLayer(args, layer);
 }
+
 
 Model *modelDressMeUp = createModel<DressMeUp, DressMeUpWidget>("DressMeUp");
