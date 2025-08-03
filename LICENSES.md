@@ -13,5 +13,6 @@ The exact Licences of third-party code and assets that I used in this project:
 | [voxglitch by clone45](https://github.com/clone45/voxglitch)                                     | GPL 3            |
 | [dr_wav.h](https://github.com/mackron/dr_libs)                                                   | Public Domain    |
 | [stb_image.h](https://github.com/nothings/stb)                                                   | Public Domain    |
+| [JwHorizontalSwitch code and assets](https://github.com/jeremywen/JW-Modules)                                                   | BSD 3-Clause    |
 | **Dress Me Up** clothing pieces and body model                                                   |  **Dress Me Up** assets were made by a friend, and are owned by BGal256. Under Creative Commons Attribution 4.0 International (CC BY 4.0)   |
 
