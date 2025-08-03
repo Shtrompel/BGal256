@@ -25,9 +25,21 @@ struct BufferDisplayWidget : Widget  {
 
     void drawScene(const DrawArgs& args);
 
-    void drawBar(const DrawArgs& args, const std::vector<float>& samples, size_t index, const NVGcolor color);
-
     void drawSamples(const DrawArgs& args, Rect box, const std::vector<float>& samples);
 
     void drawDisk(const DrawArgs& args, Rect box, const std::vector<float>& samples);
+
+    void drawBar(
+        const DrawArgs& args, 
+        size_t sampleCount, 
+        size_t index, 
+        const NVGcolor color,
+        const Rect& rect);
+
+    void drawBarFlt(
+        const DrawArgs& args, 
+        float phase, 
+        const NVGcolor color,
+        const Rect& rect);
+
 };

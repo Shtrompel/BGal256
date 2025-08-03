@@ -222,6 +222,8 @@ void BufferDisplayWidget::drawSamples(const DrawArgs &args, Rect box, const std:
     if (samples.empty())
         return;
 
+    const float PADDING = 0.1;
+
     nvgBeginPath(args.vg);
     for (size_t i = 0; i < samples.size(); i += this->module->uiDownsampling)
     {
@@ -231,7 +233,8 @@ void BufferDisplayWidget::drawSamples(const DrawArgs &args, Rect box, const std:
 
         float y = (1.0f - (samples.at(i) + 5) / 10.0f);
         y = rack::math::clamp(y, 0.0f, 1.0f);
-        y = box.getTop() + 0.9f * box.getHeight() * y;
+        y += PADDING / 2.f;
+        y = box.getTop() + (1.f - PADDING) * box.getHeight() * y;
 
         if (i == 0)
         {
@@ -246,24 +249,63 @@ void BufferDisplayWidget::drawSamples(const DrawArgs &args, Rect box, const std:
     nvgStrokeWidth(args.vg, 1.5f);
     nvgStroke(args.vg);
 
-    drawBar(args, samples, this->module->recordingIndex % samples.size(), nvgRGBA(255, 0, 0, 255));
+    // Red - Recording Index
+    drawBar(
+        args,
+        samples.size(),
+        this->module->recordingIndex % samples.size(),
+        nvgRGBA(255, 0, 0, 255),
+        box);
 
-    drawBar(args, samples, this->module->outputIndex % samples.size(), nvgRGBA(255, 255, 0, 255));
+    // Yellow - Output Index
+    drawBarFlt(
+        args,
+        this->module->automationPhase,
+        nvgRGBA(255, 255, 0, 255),
+        box);
 }
 
-void BufferDisplayWidget::drawBar(const DrawArgs &args, const std::vector<float> &samples, size_t index, const NVGcolor color)
+void BufferDisplayWidget::drawBar(
+    const DrawArgs &args,
+    size_t sampleCount,
+    size_t index,
+    const NVGcolor color,
+    const Rect &rect)
 {
     auto &vg = args.vg;
 
-    if (index < samples.size())
+    if (index < sampleCount)
     {
-        float barX = (float)index / samples.size();
-        barX *= getBox().getWidth();
-        barX += getBox().getLeft();
+        float barX = (float)index / sampleCount;
+        barX *= rect.getWidth();
+        barX += rect.getLeft();
 
         nvgBeginPath(vg);
-        nvgMoveTo(vg, barX, getBox().getTop());
-        nvgLineTo(vg, barX, getBox().getTop() + getBox().getHeight());
+        nvgMoveTo(vg, barX, rect.getTop());
+        nvgLineTo(vg, barX, rect.getTop() + rect.getHeight());
+        nvgStrokeColor(vg, color); // Red bar
+        nvgStrokeWidth(vg, 2.0f);
+        nvgStroke(vg);
+    }
+}
+
+void BufferDisplayWidget::drawBarFlt(
+    const DrawArgs &args,
+    float phase,
+    const NVGcolor color,
+    const Rect &rect)
+{
+    auto &vg = args.vg;
+
+    //if (index < sampleCount)
+    {
+        float barX =  fmod(fmod(phase, 1.0f) + 1.0f, 1.0f);
+        barX *= rect.getWidth();
+        barX += rect.getLeft();
+
+        nvgBeginPath(vg);
+        nvgMoveTo(vg, barX, rect.getTop());
+        nvgLineTo(vg, barX, rect.getTop() + rect.getHeight());
         nvgStrokeColor(vg, color); // Red bar
         nvgStrokeWidth(vg, 2.0f);
         nvgStroke(vg);

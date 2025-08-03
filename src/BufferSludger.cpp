@@ -226,7 +226,6 @@ void BufferSludger::process(const ProcessArgs &args)
 	{
 		automationPhase = recordingIndex;
 		automationPhase /= ((float)(samples[0].size()) + GNOME_PLEASING_NUMBER);
-		// if (inputs[AUTOMATION_INPUT].isConnected())
 		automationPhase += 2 * (automationInput / 10. - 0.5);
 		// automationPhase = fmod(fmod(automationPhase, 10.0f) + 10.0f, 10.0f);
 	}
@@ -246,20 +245,23 @@ void BufferSludger::process(const ProcessArgs &args)
 		time = 0.0f;
 	else
 		time = automationPhase * samples[0].size();
-	this->outputIndex = (size_t)time; // For BufferWidget
+ 	// For BufferWidget
+	this->outputIndex = (size_t)time % samples[0].size();
 
 	// anti clicking filter
-	// todo remove magic number
-	float indexDif = std::fabs(
-		static_cast<long long>(lastOutputIndex) -
-		static_cast<long long>(outputIndex));
-
-	if (antiClickFilter && args.sampleRate != 0 &&
-		lastOutputIndex != -1 &&
-		indexDif > samples[0].size() / args.sampleRate * maxSpeed4Filter)
+	// change "maxSpeed4Filter" with something better
 	{
-		fadeGain = 0.0f;
-		fadeCounter = (args.sampleRate / 1000) * this->rampSamplesMs;
+		float indexDif = std::fabs(
+			static_cast<long long>(this->lastOutputIndex) -
+			static_cast<long long>(this->outputIndex));
+
+		if (antiClickFilter && args.sampleRate != 0 &&
+			this->lastOutputIndex != -1 &&
+			indexDif > samples[0].size() / args.sampleRate * maxSpeed4Filter)
+		{
+			fadeGain = 0.0f;
+			fadeCounter = (args.sampleRate / 1000) * this->rampSamplesMs;
+		}
 	}
 
 	for (int i = 0; i < 2; ++i)
@@ -270,7 +272,7 @@ void BufferSludger::process(const ProcessArgs &args)
 			if (recordingIndex >= (long long)vec.size())
 				recordingIndex = 0;
 
-			int inputId = i == 0 ? AUDIO_INPUT : AUDIO_RIGHT_INPUT;
+			int inputId = (i == 0) ? AUDIO_INPUT : AUDIO_RIGHT_INPUT;
 
 			// Record for the buffer
 			if (inputs[inputId].isConnected())
@@ -349,10 +351,18 @@ void BufferSludger::process(const ProcessArgs &args)
 	if (masterLength != 0)
 		bpmValue = 60 / masterLength;
 
-	outputs[AUDIO_OUTPUT].setVoltage(
-		enableOutputFilter ? outFilter[0].process(output[0]) : output[0]);
-	outputs[AUDIO_RIGHT_OUTPUT].setVoltage(
-		enableOutputFilter ? outFilter[1].process(output[1]) : output[1]);
+	if (enableOutputFilter)
+	{
+		outputs[AUDIO_OUTPUT].setVoltage(
+			outFilter[0].process(output[0]));
+		outputs[AUDIO_RIGHT_OUTPUT].setVoltage(
+			outFilter[0].process(output[1]));
+	}
+	else
+	{
+		outputs[AUDIO_OUTPUT].setVoltage(output[0]);
+		outputs[AUDIO_RIGHT_OUTPUT].setVoltage(output[1]);
+	}
 
 	lights[EXTERNAL_BPM_LIGHT].setBrightness(externalBpm ? 10 : 0);
 	lights[OUTPUT_LIGHT].setBrightness(output[0] != 0.0 ? 10 : 0);
@@ -385,7 +395,7 @@ void BufferSludger::onReset()
 	antiClickFilter = true;
 	fadeGain = 1.0f;
 	fadeCounter = 0;
-	lastOutputIndex = -1;
+	this->lastOutputIndex = -1;
 	lastOutput[0] = lastOutput[1] = 0;
 	rampSamplesMs = 15;
 
@@ -399,7 +409,7 @@ void BufferSludger::onReset()
 	uiDownsampling = 32;
 
 	recordingIndex = 0;
-	outputIndex = 0;
+	this->outputIndex = 0;
 }
 
 void loadWavToSamples(
