@@ -218,7 +218,7 @@ void DressMeUp::process(const ProcessArgs &args)
 		for (int i = 0; i < stepCount; ++i)
 			sum += getStepValue(i);
 		sum *= params[OUTPUT_CV_RANGE_PARAM].getValue();
-		outputs[SUM_OUTPUT].setVoltage(sum);
+		outputs[SUM_OUTPUT].setVoltage(sum / 4.0f);
 	}
 
 	out *= params[OUTPUT_CV_RANGE_PARAM].getValue();
