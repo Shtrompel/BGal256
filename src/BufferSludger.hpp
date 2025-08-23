@@ -38,8 +38,6 @@ struct JwHorizontalSwitch : SVGSwitch {
     JwHorizontalSwitch();
 };
 
-#define ABS(x)((x>0?x:-x))
-
 
 struct BufferSludger : Module {
     enum ParamId {

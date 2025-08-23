@@ -130,11 +130,6 @@ void BufferSludger::reset(bool resetFirstBeat)
 	diffAdd = 0.0;
 }
 
-#define COOLAAAAAA()                           \
-	{                                          \
-		if (inputs[PHASE_INPUT].isConnected()) \
-	}
-
 void BufferSludger::process(const ProcessArgs &args)
 {
 

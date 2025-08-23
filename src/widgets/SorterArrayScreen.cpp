@@ -548,7 +548,7 @@ void SorterArrayWidget::updateUIFromState()
     }
 }
 
-void SorterArrayWidget::changeArraySize(int size, bool reset)
+void SorterArrayWidget:: changeArraySize(int size, bool reset)
 {
     if (!sorterArray->processingFinished)
         return;
@@ -736,12 +736,12 @@ void SorterArrayWidget::draw(const DrawArgs &args)
     {
         drawText(args, {120, 52}, sorterArray->outScale.name, 120);
     }
-    
+    else
     {
         std::string string = "";
-        if (!sorterArray->array.empty())
+        if (sorterArray->array.empty())
         {
-            string = "";
+            string = "Array's Empty!";
         }
         else if (!sorterArray->processingFinished)
         {
@@ -766,7 +766,7 @@ void SorterArrayWidget::draw(const DrawArgs &args)
             }
         }
 
-        drawText(args, {50, 100}, string);
+        drawText(args, {100, 10}, string);
     }
 }
 

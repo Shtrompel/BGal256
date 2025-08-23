@@ -10,7 +10,6 @@ SortStep::SortStep()
 	configButton(RESET_BUTTON_PARAM, "Reset");
 	configButton(SHUFFLE_BUTTON_PARAM, "Shuffle Array");
 	configButton(RECALCULATE_BUTTON_PARAM, "Recalculate");
-	
 
 	configInput(STEP_INPUT, "Global Step");
 	configInput(RESET_INPUT, "Reset");
@@ -56,7 +55,7 @@ static float mapToScale(
 		value,
 		(int)intervals.size())];
 	int octave;
-	octave = (int)value/ (int)intervals.size();
+	octave = (int)value / (int)intervals.size();
 
 	float x;
 	x = key / 12.0f;
@@ -497,19 +496,56 @@ void SortStep::process(const ProcessArgs &args)
 		}
 	}
 
-	if (checkTrigger(RESET_INPUT) || params[RESET_BUTTON_PARAM].getValue()) 
+	auto processInputButton = [this](
+								  ParamId paramId,
+								  InputId inputId,
+								  bool &btnBool) -> bool
 	{
-		sorterArray.reset();
+		bool out = false;
+
+		if (this->checkTrigger(inputId))
+		{
+			out = true;
+		}
+
+		if (this->params[paramId].getValue())
+		{
+			if (!btnBool)
+			{
+				btnBool = true;
+				out = true;
+			}
+		}
+		else
+		{
+			btnBool = false;
+		}
+
+		return out;
+	};
+
+	if (processInputButton(
+			RESET_BUTTON_PARAM,
+			RESET_INPUT,
+			buttonResetPressed))
+	{
+		this->sorterArray.reset();
 	}
 
-	if (checkTrigger(RANDOMIZE_INPUT) || params[SHUFFLE_BUTTON_PARAM].getValue())
+	if (processInputButton(
+			SHUFFLE_BUTTON_PARAM,
+			RANDOMIZE_INPUT,
+			buttonShufflePressed))
 	{
-		sorterArray.shuffle();
+		this->sorterArray.shuffle();
 	}
 
-	if (checkTrigger(RECALCULATE_INPUT) || params[RECALCULATE_BUTTON_PARAM].getValue())
+	if (processInputButton(
+			RECALCULATE_BUTTON_PARAM,
+			RECALCULATE_INPUT,
+			buttonRecalculatePressed))
 	{
-		sorterArray.calculate();
+		this->sorterArray.calculate();
 	}
 
 	outputs[CV_OUTPUT].setChannels(2);
@@ -548,7 +584,7 @@ void SortStep::process(const ProcessArgs &args)
 		outputs[END_OUTPUT].setVoltage(valueDone);
 
 		if (sorterArray.triggerShuffle())
-		{ 
+		{
 			pulseShuffle.trigger(1e-3f);
 		}
 		float valueShuffle = pulseShuffle.process(args.sampleTime) ? 10.f : 0.f;
@@ -585,7 +621,7 @@ void SortStep::onRandomize(const RandomizeEvent &e)
 json_t *SortStep::dataToJson()
 {
 	json_t *rootJ = json_object();
-	
+
 	// Save sorter state
 	json_object_set_new(rootJ, "sorter", this->sorterArray.toJson());
 
@@ -622,8 +658,6 @@ SortStepWidget::SortStepWidget(SortStep *module)
 	addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 	addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-
-
 	float xBase = 0;
 	float yBase = 83.026f;
 
@@ -649,14 +683,14 @@ SortStepWidget::SortStepWidget(SortStep *module)
 
 	float buttonsOffset = 1.f / 3;
 
-	addParam(createParamCentered<VCVButton >(
-		mm2px(Vec(xBase + rowA*(1-buttonsOffset)+rowB*buttonsOffset, rowBottomY)), module, 
+	addParam(createParamCentered<VCVButton>(
+		mm2px(Vec(xBase + rowA * (1 - buttonsOffset) + rowB * buttonsOffset, rowBottomY)), module,
 		SortStep::RESET_BUTTON_PARAM));
-	addParam(createParamCentered<VCVButton >(
-		mm2px(Vec(xBase + rowB*(1-buttonsOffset)+rowC*buttonsOffset, rowBottomY)), module, 
+	addParam(createParamCentered<VCVButton>(
+		mm2px(Vec(xBase + rowB * (1 - buttonsOffset) + rowC * buttonsOffset, rowBottomY)), module,
 		SortStep::SHUFFLE_BUTTON_PARAM));
-	addParam(createParamCentered<VCVButton >(
-		mm2px(Vec(xBase + rowC*(1-buttonsOffset)+(rowC+22.5)*buttonsOffset, rowBottomY)), module, 
+	addParam(createParamCentered<VCVButton>(
+		mm2px(Vec(xBase + rowC * (1 - buttonsOffset) + (rowC + 22.5) * buttonsOffset, rowBottomY)), module,
 		SortStep::RECALCULATE_BUTTON_PARAM));
 
 	addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(xBase + rowA, rowCentreY)), module, SortStep::END_OUTPUT));

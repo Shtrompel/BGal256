@@ -53,11 +53,15 @@ struct SortStep : Module {
     bool recalcOnChange = false;
 
     int lastAlgorithm;
+    bool buttonResetPressed = false;
+    bool buttonShufflePressed = false;
+    bool buttonRecalculatePressed = false;
 
 
     SortStep();
     bool checkTrigger(InputId inputId);
     void outputEvent(SorterArrayEvent* event);
+
     void process(const ProcessArgs& args) override;
 
     void onReset(const ResetEvent &) override;

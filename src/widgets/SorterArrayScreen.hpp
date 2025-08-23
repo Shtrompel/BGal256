@@ -26,6 +26,8 @@ constexpr int MAX_TRAVERSAL_SKIPS = 256;
 constexpr int MIN_KEY_OFFSET = -36;
 constexpr int MAX_KEY_OFFSET = 36;
 
+
+
 // The code is bad don't read it please
 struct SorterArrayWidget : Widget
 {
@@ -65,7 +67,6 @@ struct SorterArrayWidget : Widget
 	
 	std::map<std::string, Scale>
 		scalesMap;
-
 
 	DigitalControl *enableMenuControl = nullptr;
 	DigitalControl *changeAlgorithmControl = nullptr;
