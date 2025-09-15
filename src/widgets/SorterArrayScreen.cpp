@@ -368,6 +368,7 @@ void SorterArrayWidget::setMenuState(
     this->menuState = group;
 
     bool enableGroup;
+    
     {
         enableGroup = false;
         if (group == SettingsGroup::MAIN)
@@ -548,7 +549,7 @@ void SorterArrayWidget::updateUIFromState()
     }
 }
 
-void SorterArrayWidget:: changeArraySize(int size, bool reset)
+void SorterArrayWidget::changeArraySize(int size, bool reset)
 {
     if (!sorterArray->processingFinished)
         return;

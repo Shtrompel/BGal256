@@ -1,5 +1,6 @@
 #pragma once
 #include "plugin.hpp"
+
 #include "utils/SorterArray.hpp"
 #include "widgets/SorterArrayScreen.hpp"
 #include <unordered_map>
@@ -44,7 +45,7 @@ struct SortStep : Module {
     dsp::SchmittTrigger resetTrigger;
     dsp::SchmittTrigger randomizeTrigger;
     dsp::SchmittTrigger stepTrigger;
-    std::unordered_map<InputId, dsp::SchmittTrigger> triggersMap;
+    std::unordered_map<size_t, dsp::SchmittTrigger> triggersMap;
 
     SorterArray sorterArray;
     dsp::PulseGenerator pulseDone;

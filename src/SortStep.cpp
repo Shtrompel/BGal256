@@ -1,4 +1,3 @@
-#include "plugin.hpp"
 
 #include "SortStep.hpp"
 
@@ -30,19 +29,25 @@ SortStep::SortStep()
 	configOutput(SORT_END_OUTPUT, "On Sort End Trigger");
 	configOutput(TRAVERSE_END_OUTPUT, "On Traverse End Trigger");
 
-	triggersMap.insert({STEP_INPUT, dsp::SchmittTrigger{}});
-	triggersMap.insert({RESET_INPUT, dsp::SchmittTrigger{}});
-	triggersMap.insert({SHUFFLE_STEP_INPUT, dsp::SchmittTrigger{}});
-	triggersMap.insert({SORT_STEP_INPUT, dsp::SchmittTrigger{}});
-	triggersMap.insert({TRAVERSE_STEP_INPUT, dsp::SchmittTrigger{}});
-	triggersMap.insert({RANDOMIZE_INPUT, dsp::SchmittTrigger{}});
-	triggersMap.insert({RECALCULATE_INPUT, dsp::SchmittTrigger{}});
+	auto insertToMap = [=](InputId inputId) -> void
+	{
+		triggersMap.insert(
+			{(size_t)inputId, dsp::SchmittTrigger{}});
+	}; 
+
+	insertToMap(STEP_INPUT);
+	insertToMap(RESET_INPUT);
+	insertToMap(SHUFFLE_STEP_INPUT);
+	insertToMap(SORT_STEP_INPUT);
+	insertToMap(TRAVERSE_STEP_INPUT);
+	insertToMap(RANDOMIZE_INPUT);
+	insertToMap(RECALCULATE_INPUT);
 }
 
 bool SortStep::checkTrigger(InputId inputId)
 {
 	return triggersMap
-		.at(inputId)
+		.at((size_t)inputId)
 		.process(inputs[inputId].getVoltage());
 }
 
