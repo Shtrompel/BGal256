@@ -250,7 +250,7 @@ SorterArrayWidget::SorterArrayWidget(
         DigitalToggle *enableKeyToggle = new DigitalToggle(
             &this->sorterArray->enableKeyOutput);
         enableKeyToggle->setOnPress(
-            [this](bool state) {});
+            [](bool state) {});
         this->enableKeyControl = new DigitalControl(
             Vec(120, 10),
             "Scale Disabled", "Scale Enabled",

@@ -56,11 +56,11 @@ struct BPMDisplay : widget::Widget
 		float x = box.size.x * 0.15; // Shift left to keep it aligned
 		float y = box.size.y / 2;
 
-		nvgFillColor(args.vg, NVGcolor{1, 1, 1, 0.25});
+		nvgFillColor(args.vg, NVGcolor{{1, 1, 1, 0.25}});
 		nvgText(args.vg, x, y, "888", NULL);
 		nvgText(args.vg, x, y, "111", NULL);
 
-		nvgFillColor(args.vg, NVGcolor{1, 1, 1, 1});
+		nvgFillColor(args.vg, NVGcolor{{1, 1, 1, 1}});
 		nvgText(args.vg, x, y, bpmText, NULL);
 	}
 

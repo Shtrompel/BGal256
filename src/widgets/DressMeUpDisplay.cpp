@@ -1080,7 +1080,7 @@ void DressMeUpDisplay::loadCloth(
         {
             ClothingImage::Part part{
                 textureId,
-                part.centerPos - itr->parts[0].centerPos,
+                centerPos - itr->parts[0].centerPos,
                 centerPos};
             itr->parts.push_back(part);
         }
