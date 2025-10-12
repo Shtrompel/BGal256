@@ -1,7 +1,7 @@
 # If RACK_DIR is not defined when calling the Makefile, default to two directories above
 RACK_DIR ?= ../..
 
-PLUGIN_LDFLAGS += -lglew32 -lmesa
+PLUGIN_LDFLAGS +=
 PLUGIN_CFLAGS += -DGL_GLEXT_PROTOTYPES
 
 # FLAGS will be passed to both the C and C++ compiler
@@ -14,14 +14,21 @@ CXXFLAGS += -include stb_image_wrapper.h
 UNAME_S := $(shell uname -s)
 
 ifeq ($(OS),Windows_NT)
-    # Windows (typically MSYS2/MinGW/Cygwin)
-    LDFLAGS += -lopengl32
+    # Windows
+    LDFLAGS += -lopengl32 -lmesa
+    PLUGIN_LDFLAGS += -lglew32
 else
     ifeq ($(UNAME_S),Linux)
         LDFLAGS += -lGL
+        PLUGIN_LDFLAGS += -lGLEW
     else ifeq ($(UNAME_S),Darwin)
-        # macOS uses a framework
+        # drop Linux/Windows flags:
+        PLUGIN_LDFLAGS 	:= $(filter-out -lglew32 -lmesa -lGL -lGLEW, $(PLUGIN_LDFLAGS))
+        LDFLAGS 	:= $(filter-out -lglew32 -lmesa -lGL -lGLEW, $(LDFLAGS))
+
         LDFLAGS += -framework OpenGL
+        PLUGIN_LDFLAGS += -framework OpenGL
+        # SHARED_FLAG = -dynamiclib
     endif
 endif
 
