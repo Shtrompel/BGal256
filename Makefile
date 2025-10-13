@@ -11,25 +11,13 @@ CXXFLAGS += -include stb_image_wrapper.h
 
 # Careful about linking to shared libraries, since you can't assume much about the user's environment and library search path.
 # Static libraries are fine, but they should be added to this plugin's build system.
-UNAME_S := $(shell uname -s)
 
-ifeq ($(OS),Windows_NT)
-    # Windows
-    LDFLAGS += -lopengl32 -lmesa
-    PLUGIN_LDFLAGS += -lglew32
-else
-    ifeq ($(UNAME_S),Linux)
-        LDFLAGS += -lGL
-        PLUGIN_LDFLAGS += -lGLEW
-    else ifeq ($(UNAME_S),Darwin)
-        # drop Linux/Windows flags:
-        PLUGIN_LDFLAGS 	:= $(filter-out -lglew32 -lmesa -lGL -lGLEW, $(PLUGIN_LDFLAGS))
-        LDFLAGS 	:= $(filter-out -lglew32 -lmesa -lGL -lGLEW, $(LDFLAGS))
+# Use VCV's SDK for OS detection
+include $(RACK_DIR)/arch.mk
 
-        LDFLAGS += -framework OpenGL
-        PLUGIN_LDFLAGS += -framework OpenGL
-        # SHARED_FLAG = -dynamiclib
-    endif
+# OpenGL flags are only needed on Windows
+ifdef ARCH_WIN
+    LDFLAGS += -lopengl32
 endif
 
 # Add .cpp files to the build
@@ -37,7 +25,6 @@ SOURCES += $(wildcard src/*.cpp)
 SOURCES += $(wildcard src/widgets/*.cpp)
 SOURCES += $(wildcard src/utils/*.cpp)
 SOURCES += src/dep/dr_wav/dr_wav.cpp
-
 
 # Add files to the ZIP package when running `make dist`
 # The compiled plugin and "plugin.json" are automatically added.
